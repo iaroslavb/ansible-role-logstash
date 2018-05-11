@@ -1,0 +1,21 @@
+---
+# tasks file for ansible-role-logstash/
+- name: Add an Apt signing key
+  apt_key:
+    url:    https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state:  present
+
+- name: install latest apt https transport
+  apt: 
+    name:   apt-transport-https
+    state:  latest
+
+- name: add elastic repo
+  apt_repository:
+    repo:   deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state:  present
+
+- name: install logstash
+  apt: 
+    name:   logstash
+    state:  latest
